@@ -26,21 +26,27 @@ const Register = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const data = await axios.post("/api/v1/user/register", {
+  e.preventDefault();
+  try {
+    const data = await axios.post(
+      "https://my-blog-app-backend-h4d5.onrender.com/api/v1/user/register",
+      {
         username: inputs.name,
         email: inputs.email,
         password: inputs.password,
-      });
-      if (data.data.success) {
-        toast.success("User Register Successfully");
-        navigate("/login");
       }
-    } catch (error) {
-      console.log(error);
+    );
+    if (data.data.success) {
+      toast.success("User Registered Successfully");
+      navigate("/login");
+    } else {
+      toast.error("Registration failed.");
     }
-  };
+  } catch (error: any) {
+    console.error(error);
+    toast.error(error?.response?.data?.message || "Registration failed.");
+  }
+};
 
   return (
     <>
