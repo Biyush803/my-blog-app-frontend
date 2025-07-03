@@ -29,7 +29,10 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/api/v1/user/login", inputs);
+      const res = await axios.post(
+        "https://my-blog-app-backend-h4d5.onrender.com/api/v1/user/login",
+        inputs
+      );
 
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
@@ -60,34 +63,40 @@ const Login: React.FC = () => {
         padding={2}
         gap={4}
       >
-        <Box 
-         position="fixed"
-            top="50%"
-            left="15%"
-            sx={{
-              transform: "translateY(-50%)",
-              maxWidth: 400,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 2,
-              boxShadow: "10px 10px 20px #ccc",
-              borderRadius: 2,
-            }}>
-
+        <Box
+          position="fixed"
+          top="50%"
+          left="15%"
+          sx={{
+            transform: "translateY(-50%)",
+            maxWidth: 400,
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 2,
+            boxShadow: "10px 10px 20px #ccc",
+            borderRadius: 2,
+          }}
+        >
           <img
             src="/BlogLogo.jpg"
             alt="My Blog App Logo"
             style={{ width: "100%", maxWidth: "350px", borderRadius: "10px" }}
           />
-          
-            <Typography variant="h6" padding={2} textAlign="center" fontFamily="sans-serif" fontWeight="bold" color="primary">
-              Welcome to My Blog App
-            </Typography>
+
+          <Typography
+            variant="h6"
+            padding={2}
+            textAlign="center"
+            fontFamily="sans-serif"
+            fontWeight="bold"
+            color="primary"
+          >
+            Welcome to My Blog App
+          </Typography>
         </Box>
-         
 
         <form onSubmit={handleSubmit}>
           <Box
