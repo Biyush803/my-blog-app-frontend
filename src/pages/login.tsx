@@ -30,7 +30,7 @@ const Login: React.FC = () => {
 
     try {
       const res = await axios.post(
-        "https://my-blog-app-backend-h4d5.onrender.com/api/v1/user/login",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/login`,
         inputs
       );
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 import { Box, Typography, TextField, Button } from "@mui/material";
 const Register = () => {
@@ -26,27 +26,28 @@ const Register = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  try {
-    const data = await axios.post(
-      "https://my-blog-app-backend-h4d5.onrender.com/api/v1/user/register",
-      {
-        username: inputs.name,
-        email: inputs.email,
-        password: inputs.password,
+    e.preventDefault();
+    try {
+      const data = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
+        {
+          username: inputs.name,
+          email: inputs.email,
+          password: inputs.password,
+        }
+      );
+
+      if (data.data.success) {
+        toast.success("User Registered Successfully");
+        navigate("/login");
+      } else {
+        toast.error("Registration failed.");
       }
-    );
-    if (data.data.success) {
-      toast.success("User Registered Successfully");
-      navigate("/login");
-    } else {
-      toast.error("Registration failed.");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || "Registration failed.");
     }
-  } catch (error: any) {
-    console.error(error);
-    toast.error(error?.response?.data?.message || "Registration failed.");
-  }
-};
+  };
 
   return (
     <>
