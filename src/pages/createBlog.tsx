@@ -27,12 +27,15 @@ const CreateBlog = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/blog/create-blog", {
-        title: inputs.title,
-        description: inputs.description,
-        image: inputs.image,
-        user:id,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/blog/create-blog`,
+        {
+          title: inputs.title,
+          description: inputs.description,
+          image: inputs.image,
+          user: id,
+        }
+      );
       if (data?.success) {
         toast.success("Blog Created");
         navigate("/my-blogs");

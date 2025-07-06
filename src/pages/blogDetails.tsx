@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const BlogDetails = () => {
   const [blog, setBlog] = useState<any>({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [inputs, setInputs] = useState({
     title: "",
@@ -16,7 +16,10 @@ const BlogDetails = () => {
   });
   const getBlogDetail = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/blog/get-blog/${id}`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/blog/get-blog/${id}`
+      );
+
       setBlog(data?.blog);
       setInputs({
         title: data?.blog?.title || "",
@@ -43,15 +46,19 @@ const BlogDetails = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const {data } = await axios.put(`/api/v1/blog/update-blog/${id}`, {
-        title: inputs.title,
-        description: inputs.description,
-        image: inputs.image,
-        user: id,
-      });
-      if(data?.success){
-        toast.success("Blog Updated Successfully")
-        navigate('/my-blogs')
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/v1/blog/update-blog/${id}`,
+        {
+          title: inputs.title,
+          description: inputs.description,
+          image: inputs.image,
+          user: id,
+        }
+      );
+
+      if (data?.success) {
+        toast.success("Blog Updated Successfully");
+        navigate("/my-blogs");
       }
     } catch (error) {
       console.log(error);

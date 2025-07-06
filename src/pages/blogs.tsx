@@ -19,7 +19,9 @@ const Blogs = () => {
 
   const getAllBlogs = async () => {
     try {
-      const { data } = await axios.get("/api/v1/blog/all-blog");
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/v1/blog/all-blog`
+      );
       if (data?.success) {
         setBlogs(data?.blogs);
       }
@@ -35,7 +37,8 @@ const Blogs = () => {
     <>
       {blogs &&
         blogs.map((blog) => (
-          <BlogCard key = {blog._id}
+          <BlogCard
+            key={blog._id}
             id={blog._id}
             isUser={localStorage.getItem("userId") === blog.userId}
             title={blog.title}
