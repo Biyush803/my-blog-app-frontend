@@ -66,15 +66,19 @@ export default function BlogCard({
   const handleEdit = () => {
     navigate(`/blog-details/${id}`);
   };
-const token: string | null = localStorage.getItem("token");
+  const token: string | null = localStorage.getItem("token");
 
   const handleDelete = async () => {
     try {
-      const { data } = await axios.delete(`/api/v1/blog/delete-blog/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/v1/blog/delete-blog/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (data?.success) {
         alert("Blog Deleted Successfully");
         setTimeout(() => {
