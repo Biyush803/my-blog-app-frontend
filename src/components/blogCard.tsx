@@ -69,6 +69,11 @@ export default function BlogCard({
   const token: string | null = localStorage.getItem("token");
 
   const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this blog?"
+    );
+    if (!confirmDelete) return; // stop if user cancels
+
     try {
       const { data } = await axios.delete(
         `${import.meta.env.VITE_API_URL}/api/v1/blog/delete-blog/${id}`,
@@ -81,10 +86,7 @@ export default function BlogCard({
 
       if (data?.success) {
         alert("Blog Deleted Successfully");
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-        navigate("/my-blogs");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
