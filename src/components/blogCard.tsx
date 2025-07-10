@@ -87,6 +87,7 @@ export default function BlogCard({
       if (data?.success) {
         alert("Blog Deleted Successfully");
         navigate(`/my-blogs`)
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
