@@ -30,9 +30,10 @@ function App() {
         <Toaster />
         <Box flex={1}>
           <Routes>
+            <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/" element={<Blogs />} />
+            <Route path="/all-blog" element={<Blogs />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/my-blogs" element={<UserBlogs />} />
             <Route path="/all-blog" element={<Blogs />} />
