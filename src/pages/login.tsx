@@ -41,8 +41,7 @@ const Login: React.FC = () => {
 
         dispatch(authActions.login());
         toast.success("User Login Successful");
-
-        navigate("/");
+        navigate("/all-blog");
       } else {
         toast.error("Login failed. Try again.");
       }
