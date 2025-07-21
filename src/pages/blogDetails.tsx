@@ -1,7 +1,7 @@
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const BlogDetails = () => {
@@ -14,12 +14,12 @@ const BlogDetails = () => {
     image: "",
     user: "",
   });
+
   const getBlogDetail = async () => {
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/v1/blog/get-blog/${id}`
       );
-
       setBlog(data?.blog);
       setInputs({
         title: data?.blog?.title || "",
@@ -88,6 +88,19 @@ const BlogDetails = () => {
           >
             Edit the Post
           </Typography>
+
+          {/* Title with link to full blog */}
+          {inputs.title && (
+            <Typography textAlign="center" mb={2}>
+              <Link
+                to={`/blog/${id}`}
+                style={{ color: "blue", textDecoration: "underline" }}
+              >
+                View Full Blog: {inputs.title}
+              </Link>
+            </Typography>
+          )}
+
           <InputLabel
             sx={{ mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" }}
           >
@@ -100,7 +113,8 @@ const BlogDetails = () => {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
+          />
+
           <InputLabel
             sx={{ mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" }}
           >
@@ -113,7 +127,8 @@ const BlogDetails = () => {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
+          />
+
           <InputLabel
             sx={{ mb: 1, mt: 2, fontSize: "24px", fontWeight: "bold" }}
           >
@@ -126,7 +141,8 @@ const BlogDetails = () => {
             margin="normal"
             variant="outlined"
             required
-          ></TextField>
+          />
+
           <Button type="submit" color="warning" variant="contained">
             Update
           </Button>
@@ -135,4 +151,5 @@ const BlogDetails = () => {
     </>
   );
 };
+
 export default BlogDetails;
